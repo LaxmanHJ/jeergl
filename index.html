@@ -28,17 +28,12 @@
         font-weight: 700;
         color: inherit;
     }
-    .dark body { background-color: #0f172a; color: #f1f5f9; }
-    .dark header.glass { background-color: rgba(15,23,42,0.8); border-color: #334155; }
-    .dark .project-card { background-color: #1e293b; border-color: #334155; }
-    .dark a { color: #e2e8f0; }
-    .dark input, .dark textarea { background-color: #0f172a; border-color: #334155; color: #f1f5f9; }
   </style>
 </head>
-<body class="antialiased text-slate-900 bg-white dark:bg-slate-900 dark:text-slate-100">
+<body class="antialiased text-slate-900 bg-white">
 
   <!-- NAV -->
-  <header class="fixed w-full top-0 z-50 glass border-b border-slate-200 dark:border-slate-700">
+  <header class="fixed w-full top-0 z-50 glass border-b border-slate-200">
     <nav class="max-w-6xl mx-auto px-6 md:px-8 py-3 flex items-center justify-between">
 
       <div class="hidden md:flex items-center gap-6 text-sm">
@@ -46,27 +41,23 @@
         <a href="#projects" class="hover:underline">Projects</a>
         <a href="#contact" class="hover:underline">Contact</a>
         <a href="https://docs.google.com/document/d/1ubEH4ZbUkXl6g4cgh8lGwgXr2uz6ghdUa1bOLRCfFms/edit?usp=drive_link" class="px-3 py-1 border rounded-md">Resume</a>
-        <a href="#" class="font-semibold text-lg"> 
-            <button id="darkToggle" class="py-2 border rounded-md inline-block text-center">🌙</button>
-        </a>  
-    </div>
+      </div>
 
       <button id="mobileBtn" class="md:hidden p-2 inline-flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </nav>
-    
+    <a href="#" class="font-semibold text-lg"> </a>
 
 
     <!-- mobile menu -->
-    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100 dark:border-slate-700">
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100">
       <div class="px-6 py-4 flex flex-col gap-3">
         <a href="#about" class="py-2">About</a>
         <a href="https://github.com/LaxmanHJ?tab=repositories" class="py-2">Projects</a>
         <a href="#contact" class="py-2">Contact</a>
         <a href="https://docs.google.com/document/d/1ubEH4ZbUkXl6g4cgh8lGwgXr2uz6ghdUa1bOLRCfFms/edit?usp=drive_link" class="py-2 border rounded-md inline-block text-center">Resume</a>
-        <button id="darkToggleMobile" class="py-2 border rounded-md">🌙 Dark Mode</button>  
-    </div>
+      </div>
     </div>
   </header>
 
@@ -75,30 +66,30 @@
     <section class="max-w-6xl mx-auto px-6 md:px-8 py-20 md:py-28 flex flex-col md:flex-row items-center gap-12">
       <div class="flex-1">
         <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Laxman Jeergal</h1>
-        <div class="mt-4 text-xl text-slate-700 dark:text-slate-300">
+        <div class="mt-4 text-xl text-slate-700">
           <span id="role" class="font-medium"></span>
           <span class="inline-block ml-2 text-slate-400">• building delightful products</span>
         </div>
 
-        <p class="mt-6 text-slate-600 dark:text-slate-400 max-w-xl">I build web and mobile products — shipping accessible, maintainable, and delightful experiences. Currently building on React, TypeScript and Node.</p>
+        <p class="mt-6 text-slate-600 max-w-xl">I build web and mobile products — shipping accessible, maintainable, and delightful experiences. Currently building on React, TypeScript and Node.</p>
 
         <div class="mt-6 flex gap-3">
           <a href="#projects" class="px-4 py-2 rounded-md border inline-block">See projects</a>
-          <a href="#contact" class="px-4 py-2 rounded-md inline-block bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900">Contact</a>
+          <a href="#contact" class="px-4 py-2 rounded-md inline-block bg-slate-900 text-white">Contact</a>
         </div>
 
-        <div class="mt-8 flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+        <div class="mt-8 flex items-center gap-4 text-sm text-slate-500">
           <div>Currently:</div>
           <div class="px-3 py-1 border rounded">Open to work</div>
         </div>
       </div>
 
       <div class="w-full md:w-96 flex-shrink-0">
-        <div class="rounded-2xl border p-6 flex flex-col items-center gap-4 shadow-sm dark:border-slate-700 dark:bg-slate-800" >
+        <div class="rounded-2xl border p-6 flex flex-col items-center gap-4 shadow-sm">
           <img src="images/portfolioImg.jpeg" alt="avatar" class="w-36 h-36 rounded-full object-cover" />
           <div class="text-center">
             <div class="font-semibold">Laxman Jeergal</div>
-            <div class="text-sm text-slate-500 dark:text-slate-400">Frontend · Full‑stack</div>
+            <div class="text-sm text-slate-500">Frontend · Full‑stack</div>
           </div>
           <div class="w-full mt-2 text-sm text-slate-600">I am currently working at 
             <strong><a class="highlight-link" href="https://www.glodmansachs.com/" target="_blank">Goldman Sachs</a> </strong>as Software Engineer, Get in touch  
@@ -224,27 +215,6 @@
 
     // Optional: basic form submit handler (prevent refresh)
     document.querySelector('form')?.addEventListener('submit', function(e){ e.preventDefault(); alert('This is a demo form — wire up your backend or use email links.'); });
-
-    // Dark mode toggle
-    const html = document.documentElement;
-    const darkBtn = document.getElementById('darkToggle');
-    const darkBtnMobile = document.getElementById('darkToggleMobile');
-    function toggleDark() {
-    html.classList.toggle('dark');
-    if(html.classList.contains('dark')) {
-    localStorage.setItem('theme','dark');
-    } else {
-    localStorage.setItem('theme','light');
-    }
-    }
-    darkBtn?.addEventListener('click', toggleDark);
-    darkBtnMobile?.addEventListener('click', toggleDark);
-
-
-    // Load preference
-    if(localStorage.getItem('theme')==='dark') {
-    html.classList.add('dark');
-    }
-</script>
+  </script>
 </body>
 </html>
