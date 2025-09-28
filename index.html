@@ -1,487 +1,204 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Developer Portfolios</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-        }
-
-        main {
-            margin-top: 80px;
-        }
-
-        .hero {
-            padding: 4rem 0;
-            text-align: center;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 0.4s both;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .cta-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .section {
-            padding: 4rem 0;
-            background: white;
-            margin: 2rem 0;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-card {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            color: white;
-            transition: transform 0.3s ease;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .skill-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 15px;
-            border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .project-card h3 {
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: transform 0.3s ease;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        .social-links {
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: #667eea;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .skills-grid,
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .typing-effect {
-            border-right: 2px solid white;
-            padding-right: 5px;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { border-right-color: white; }
-            51%, 100% { border-right-color: transparent; }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jyotinder-like Portfolio — HTML</title>
+  <meta name="description" content="Portfolio template inspired by https://jyotindersingh.com/ — pure HTML/CSS/JS (Tailwind CDN)." />
+  <!-- Tailwind via CDN for quick prototyping -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    /* small customizations to mimic subtle look */
+    .glass { background-color: rgba(255,255,255,0.6); backdrop-filter: blur(6px); }
+    .fade-in { animation: fadeIn .5s ease forwards; opacity: 0; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    /* project card hover */
+    .project-card { transition: transform .18s ease, box-shadow .18s ease; }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(2,6,23,0.08); }
+  </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">Portfolio</a>
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<body class="antialiased text-slate-900 bg-white">
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Hello, I'm <span class="typing-effect" id="typewriter">Your Name</span></h1>
-                <p>Full Stack Developer • Problem Solver • Tech Enthusiast</p>
-                <a href="#contact" class="cta-button">Let's Work Together</a>
+  <!-- NAV -->
+  <header class="fixed w-full top-0 z-50 glass border-b border-slate-200">
+    <nav class="max-w-6xl mx-auto px-6 md:px-8 py-3 flex items-center justify-between">
+      <a href="#" class="font-semibold text-lg">J. Singh</a>
+
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#about" class="hover:underline">About</a>
+        <a href="#projects" class="hover:underline">Projects</a>
+        <a href="#contact" class="hover:underline">Contact</a>
+        <a href="#resume" class="px-3 py-1 border rounded-md">Resume</a>
+      </div>
+
+      <button id="mobileBtn" class="md:hidden p-2 inline-flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+
+    <!-- mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100">
+      <div class="px-6 py-4 flex flex-col gap-3">
+        <a href="#about" class="py-2">About</a>
+        <a href="#projects" class="py-2">Projects</a>
+        <a href="#contact" class="py-2">Contact</a>
+        <a href="#resume" class="py-2 border rounded-md inline-block text-center">Resume</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-20">
+    <!-- HERO -->
+    <section class="max-w-6xl mx-auto px-6 md:px-8 py-20 md:py-28 flex flex-col md:flex-row items-center gap-12">
+      <div class="flex-1">
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Jyotinder Singh</h1>
+        <div class="mt-4 text-xl text-slate-700">
+          <span id="role" class="font-medium"></span>
+          <span class="inline-block ml-2 text-slate-400">• building delightful products</span>
+        </div>
+
+        <p class="mt-6 text-slate-600 max-w-xl">I build web and mobile products — shipping accessible, maintainable, and delightful experiences. Currently building on React, TypeScript and Node.</p>
+
+        <div class="mt-6 flex gap-3">
+          <a href="#projects" class="px-4 py-2 rounded-md border inline-block">See projects</a>
+          <a href="#contact" class="px-4 py-2 rounded-md inline-block bg-slate-900 text-white">Contact</a>
+        </div>
+
+        <div class="mt-8 flex items-center gap-4 text-sm text-slate-500">
+          <div>Currently:</div>
+          <div class="px-3 py-1 border rounded">Open to work</div>
+        </div>
+      </div>
+
+      <div class="w-full md:w-96 flex-shrink-0">
+        <div class="rounded-2xl border p-6 flex flex-col items-center gap-4 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="avatar" class="w-36 h-36 rounded-full object-cover" />
+          <div class="text-center">
+            <div class="font-semibold">Jyotinder Singh</div>
+            <div class="text-sm text-slate-500">Frontend · Full‑stack</div>
+          </div>
+          <div class="w-full mt-2 text-sm text-slate-600">Brief one-liner about what you do. Add location, availability or short tagline here.</div>
+          <div class="w-full flex gap-2 mt-3">
+            <a href="#" class="flex-1 text-center py-2 border rounded">Github</a>
+            <a href="#" class="flex-1 text-center py-2 border rounded">Dribbble</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="max-w-6xl mx-auto px-6 md:px-8 py-12">
+      <h2 class="text-2xl font-semibold">About</h2>
+      <div class="mt-4 text-slate-600 max-w-3xl">
+        <p>I’m a product-minded engineer who cares about performance, accessibility and design. I enjoy turning fuzzy problems into polished, intuitive user experiences and shipping code that lasts.</p>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="max-w-6xl mx-auto px-6 md:px-8 py-12">
+      <h2 class="text-2xl font-semibold">Selected projects</h2>
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Project cards (repeat as needed) -->
+        <article class="project-card border rounded-2xl p-6 bg-white">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold text-lg">Project Alpha</h3>
+              <p class="mt-2 text-slate-600">Full‑stack web app · React / Node / Postgres</p>
             </div>
-        </section>
+            <a href="#" class="text-sm self-start">View →</a>
+          </div>
+        </article>
 
-        <div class="container">
-            <section id="about" class="section">
-                <h2>About Me</h2>
-                <p style="text-align: center; font-size: 1.1rem; max-width: 800px; margin: 0 auto; color: #666;">
-                    I'm a passionate developer with expertise in modern web technologies. I love creating 
-                    elegant solutions to complex problems and am always eager to learn new technologies 
-                    and take on challenging projects.
-                </p>
-            </section>
-
-            <section id="skills" class="section">
-                <h2>My Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <h3>Frontend Development</h3>
-                        <p>React, Vue.js, HTML5, CSS3, JavaScript (ES6+)</p>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Backend Development</h3>
-                        <p>Node.js, Python, PHP, Express.js, Django</p>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Database & Cloud</h3>
-                        <p>MongoDB, MySQL, PostgreSQL, AWS, Docker</p>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Tools & Others</h3>
-                        <p>Git, Linux, REST APIs, GraphQL, Testing</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="projects" class="section">
-                <h2>Featured Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3>E-Commerce Platform</h3>
-                        <p>A full-stack e-commerce solution built with React and Node.js, featuring user authentication, payment integration, and admin dashboard.</p>
-                        <p><strong>Tech:</strong> React, Node.js, MongoDB, Stripe API</p>
-                    </div>
-                    <div class="project-card">
-                        <h3>Task Management App</h3>
-                        <p>A collaborative project management tool with real-time updates, drag-and-drop functionality, and team collaboration features.</p>
-                        <p><strong>Tech:</strong> Vue.js, Express.js, Socket.io, MySQL</p>
-                    </div>
-                    <div class="project-card">
-                        <h3>Weather Dashboard</h3>
-                        <p>A responsive weather application that provides detailed forecasts, interactive maps, and location-based weather alerts.</p>
-                        <p><strong>Tech:</strong> JavaScript, Weather API, Chart.js, CSS3</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="contact" class="section">
-                <h2>Get In Touch</h2>
-                <form class="contact-form" onsubmit="handleSubmit(event)">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
-            </section>
-        </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Your Name. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#" title="GitHub">⚡</a>
-                <a href="#" title="LinkedIn">💼</a>
-                <a href="#" title="Twitter">🐦</a>
-                <a href="#" title="Email">📧</a>
+        <article class="project-card border rounded-2xl p-6 bg-white">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold text-lg">Design System</h3>
+              <p class="mt-2 text-slate-600">Component library + docs site</p>
             </div>
+            <a href="#" class="text-sm self-start">View →</a>
+          </div>
+        </article>
+
+        <article class="project-card border rounded-2xl p-6 bg-white">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold text-lg">Mobile App</h3>
+              <p class="mt-2 text-slate-600">React Native app with offline sync</p>
+            </div>
+            <a href="#" class="text-sm self-start">View →</a>
+          </div>
+        </article>
+
+        <article class="project-card border rounded-2xl p-6 bg-white">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold text-lg">Open Source</h3>
+              <p class="mt-2 text-slate-600">Libraries, tooling and docs</p>
+            </div>
+            <a href="#" class="text-sm self-start">View →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="max-w-6xl mx-auto px-6 md:px-8 py-12">
+      <h2 class="text-2xl font-semibold">Contact</h2>
+      <p class="mt-4 text-slate-600">Want to work together? Send me a message.</p>
+
+      <form class="mt-6 max-w-xl grid grid-cols-1 gap-4">
+        <input class="border rounded px-4 py-3" placeholder="Your name" />
+        <input class="border rounded px-4 py-3" placeholder="Email" />
+        <textarea class="border rounded px-4 py-3" placeholder="Message" rows="5"></textarea>
+        <div>
+          <button type="submit" class="px-5 py-2 rounded bg-slate-900 text-white">Send message</button>
         </div>
-    </footer>
+      </form>
+    </section>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+    <!-- FOOTER / RESUME -->
+    <section id="resume" class="max-w-6xl mx-auto px-6 md:px-8 py-12">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-semibold">Resume</h3>
+          <p class="text-sm text-slate-600">Link to your resume or PDF.</p>
+        </div>
+        <div>
+          <a href="#" class="px-4 py-2 border rounded">Download</a>
+        </div>
+      </div>
 
-        // Typewriter effect
-        const typewriterText = ['Your Name', 'Developer', 'Creator', 'Problem Solver'];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typewriterElement = document.getElementById('typewriter');
-        
-        function typewriter() {
-            const currentText = typewriterText[textIndex];
-            
-            if (isDeleting) {
-                typewriterElement.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typewriterElement.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-            }
-            
-            if (!isDeleting && charIndex === currentText.length) {
-                setTimeout(() => isDeleting = true, 1500);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % typewriterText.length;
-            }
-            
-            setTimeout(typewriter, isDeleting ? 50 : 150);
-        }
-        
-        setTimeout(typewriter, 1000);
+      <footer class="mt-12 text-sm text-slate-500">© <span id="year"></span> Jyotinder Singh — built with HTML + Tailwind</footer>
+    </section>
 
-        // Header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.color = '#333';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.1)';
-                header.style.color = 'white';
-            }
-        });
+  </main>
 
-        // Form submission handler
-        function handleSubmit(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            alert(`Thanks ${name}! Your message has been received. I'll get back to you soon at ${email}.`);
-            event.target.reset();
-        }
+  <script>
+    // Mobile toggle
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
 
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    // Simple type rotator for the role line
+    const roles = ["Software Engineer", "Frontend · Full‑stack", "Open Source Contributor"];
+    const roleEl = document.getElementById('role');
+    let i = 0;
+    function showRole(idx) {
+      roleEl.classList.remove('opacity-0');
+      roleEl.textContent = roles[idx];
+      roleEl.animate([{opacity:0, transform:'translateY(6px)'},{opacity:1, transform:'translateY(0)'}],{duration:300, easing:'ease-out'});
+    }
+    showRole(0);
+    setInterval(()=>{ i = (i+1) % roles.length; showRole(i); }, 2600);
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Observe all sections
-        document.querySelectorAll('.section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
-            section.style.transition = 'all 0.6s ease';
-            observer.observe(section);
-        });
-    </script>
+    // Optional: basic form submit handler (prevent refresh)
+    document.querySelector('form')?.addEventListener('submit', function(e){ e.preventDefault(); alert('This is a demo form — wire up your backend or use email links.'); });
+  </script>
 </body>
 </html>
