@@ -16,18 +16,17 @@
     /* project card hover */
     .project-card { transition: transform .18s ease, box-shadow .18s ease; }
     .project-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(2,6,23,0.08); }
-    .highlight-link {
+    .highlight-link {    position: relative;
+        display: inline-block;
+    }
+    a {
         -webkit-transition: all .2s 
     ease-in-out;
         transition: all .2s 
     ease-in-out;
-        font-weight: 400;
         text-decoration: none;
-        display: inline-block;
-        padding: 2px 3px;
-        text-decoration: none;
-        -webkit-box-shadow: inset 0 -3px 0 #007bff;
-        box-shadow: inset 0 -3px 0 #007bff;
+        font-weight: 700;
+        color: inherit;
     }
   </style>
 </head>
@@ -91,8 +90,8 @@
             <div class="text-sm text-slate-500">Frontend · Full‑stack</div>
           </div>
           <div class="w-full mt-2 text-sm text-slate-600">I am currently working at 
-            <a class="highlight-link" href="https://www.glodmansachs.com/" target="_blank">Goldman Sachs</a> as Software Engineer, Get in touch  
-            <a href="mailto:laxmanhjeergal@gmail.com" target="_blank" class="highlight-link">laxmanhjeergal@gmail.com</a>
+            <strong><a class="highlight-link" href="https://www.glodmansachs.com/" target="_blank">Goldman Sachs</a> </strong>as Software Engineer, Get in touch  
+            <strong><a href="mailto:laxmanhjeergal@gmail.com" target="_blank" class="highlight-link">laxmanhjeergal@gmail.com</a></strong>
           </div>
           <div class="w-full flex gap-2 mt-3"> 
             <a href="https://github.com/LaxmanHJ/" class="flex-1 text-center py-2 border rounded">🔬 Github</a>
