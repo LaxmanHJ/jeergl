@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Papershelf</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7fafc;
+      color: #222;
+      padding: 20px;
+    }
+    .container {
+      max-width: 960px;
+      margin: auto;
+    }
+    header {
+      margin-bottom: 24px;
+    }
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #555;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+    .meta {
+      font-size: 13px;
+      color: #666;
+    }
+    .card p {
+      font-size: 14px;
+      color: #444;
+      margin: 0;
+    }
+    .tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+    .tag {
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #edf2f7;
+      color: #333;
+    }
+    footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 13px;
+      color: #777;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="title">Papershelf</div>
+      <div class="subtitle">Some Reserach papers that I found amusing</div>
+    </header>
+
+    <main class="grid">
+      <a class="card" href="https://arxiv.org/pdf/2509.04664" target="_blank">
+        <h3>Why Language Models Hallucinate</h3>
+        <div class="meta">OpenAI, 2025</div>
+        <p>LLMs are known to produce overconfident, plausible falsehoods, which diminish their
+            utility and trustworthiness. This error mode is known as “hallucination</p>
+        <div class="tags">
+          <span class="tag">LLM</span>
+          <span class="tag">Algebra</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://machinelearning.apple.com/research/illusion-of-thinking" target="_blank">
+        <h3>The Illusion of Thinking</h3>
+        <div class="meta">Apple, 2025</div>
+        <p>Understanding the Strengths and Limitations of Reasoning Models</p>
+        <div class="tags">
+          <span class="tag">Transformers</span>
+          <span class="tag">LLM Limitations</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://medium.com/binu-22feet/dismissing-python-garbage-collection-at-instagram-37faf66828ad">
+        <h3>Dismissing Python Garbage Collection at Instagram</h3>
+        <div class="meta">Instagram, 2017</div>
+        <p>By disabling Garbage Collection, we can reduce the memory footprint</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Memory</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://blog.x.com/engineering/en_us/a/2012/blobstore-twitter-s-in-house-photo-storage-system" target="_blank">
+        <h3>Twitter’s in-house photo storage system</h3>
+        <div class="meta">Twitter, 2017</div>
+        <p>Blobstore, low-cost and scalable storage system built to store photos and
+            other binary large objects, also known as blobs</p>
+        <div class="tags">
+          <span class="tag">Data structures</span>
+          <span class="tag">Backend</span>
+        </div>
+      </a>
+    </main>
+
+    <footer>
+      Made with ❤️ — simple static HTML/CSS version of Papershelf
+    </footer>
+  </div>
+</body>
+</html>
