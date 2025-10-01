@@ -422,6 +422,74 @@
             background: linear-gradient(90deg, var(--card-bg) 0%, var(--card-border) 50%, var(--card-bg) 100%);
             background-size: 1000px 100%;
         }
+
+        /* View toggle styles */
+        .view-toggle {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toggle-label {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .toggle-container {
+            position: relative;
+            display: flex;
+            background: var(--dark-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .toggle-container input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .toggle-option {
+            padding: 8px 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            color: var(--text-muted);
+            font-size: 0.9em;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            height: calc(100% - 8px);
+            width: calc(50% - 6px);
+            background: var(--primary-color);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+
+        input[id="viewDays"]:checked ~ .toggle-slider {
+            transform: translateX(0);
+        }
+
+        input[id="viewWeeks"]:checked ~ .toggle-slider {
+            transform: translateX(100%);
+        }
+
+        input[id="viewDays"]:checked ~ label[for="viewDays"],
+        input[id="viewWeeks"]:checked ~ label[for="viewWeeks"] {
+            color: var(--text-primary);
+        }
     </style>
 </head>
 <body>
@@ -443,6 +511,17 @@
                 </div>
                 <button onclick="updateVisualization()">Calculate</button>
             </div>
+            
+            <div class="view-toggle">
+                <label class="toggle-label">View Mode</label>
+                <div class="toggle-container">
+                    <input type="radio" id="viewDays" name="viewMode" value="days" checked>
+                    <label for="viewDays" class="toggle-option">Days</label>
+                    <input type="radio" id="viewWeeks" name="viewMode" value="weeks">
+                    <label for="viewWeeks" class="toggle-option">Weeks</label>
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
         </div>
 
         <div class="progress-bar">
@@ -452,15 +531,15 @@
         <div class="stats">
             <div class="stat-item">
                 <div class="stat-number" id="totalDays">29,200</div>
-                <div class="stat-label">Total Days</div>
+                <div class="stat-label" id="totalLabel">Total Days</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number" id="spentDays">12,784</div>
-                <div class="stat-label">Days Lived</div>
+                <div class="stat-label" id="spentLabel">Days Lived</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number" id="remainingDays">16,416</div>
-                <div class="stat-label">Days Remaining</div>
+                <div class="stat-label" id="remainingLabel">Days Remaining</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number" id="percentageLived">44%</div>
@@ -502,11 +581,18 @@
             const remainingDays = Math.max(0, totalDays - spentDays);
             const percentageLived = Math.min(100, Math.round((spentDays / totalDays) * 100));
             
+            const totalWeeks = Math.floor(totalDays / 7);
+            const spentWeeks = Math.floor(spentDays / 7);
+            const remainingWeeks = Math.max(0, totalWeeks - spentWeeks);
+            
             return {
                 total: totalDays,
                 spent: spentDays,
                 remaining: remainingDays,
-                percentage: percentageLived
+                percentage: percentageLived,
+                totalWeeks: totalWeeks,
+                spentWeeks: spentWeeks,
+                remainingWeeks: remainingWeeks
             };
         }
 
@@ -514,16 +600,33 @@
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
+        function getViewMode() {
+            return document.querySelector('input[name="viewMode"]:checked').value;
+        }
+
         function updateVisualization() {
             const birthDate = document.getElementById('birthdate').value;
             const lifeExpectancy = parseInt(document.getElementById('lifeExpectancy').value);
+            const viewMode = getViewMode();
             
             const days = calculateDays(birthDate, lifeExpectancy);
             
+            // Update labels based on view mode
+            const isWeekView = viewMode === 'weeks';
+            document.getElementById('totalLabel').textContent = isWeekView ? 'Total Weeks' : 'Total Days';
+            document.getElementById('spentLabel').textContent = isWeekView ? 'Weeks Lived' : 'Days Lived';
+            document.getElementById('remainingLabel').textContent = isWeekView ? 'Weeks Remaining' : 'Days Remaining';
+            
             // Update stats with animation
-            animateValue('totalDays', days.total);
-            animateValue('spentDays', days.spent);
-            animateValue('remainingDays', days.remaining);
+            if (isWeekView) {
+                animateValue('totalDays', days.totalWeeks);
+                animateValue('spentDays', days.spentWeeks);
+                animateValue('remainingDays', days.remainingWeeks);
+            } else {
+                animateValue('totalDays', days.total);
+                animateValue('spentDays', days.spent);
+                animateValue('remainingDays', days.remaining);
+            }
             document.getElementById('percentageLived').textContent = days.percentage + '%';
             
             // Update progress bar
@@ -539,19 +642,32 @@
             setTimeout(() => {
                 container.classList.remove('loading');
                 
+                const totalUnits = isWeekView ? days.totalWeeks : days.total;
+                const spentUnits = isWeekView ? days.spentWeeks : days.spent;
+                
                 // Create dots with stagger
-                for (let i = 0; i < days.total; i++) {
+                for (let i = 0; i < totalUnits; i++) {
                     setTimeout(() => {
                         const dot = document.createElement('div');
-                        dot.className = 'dot ' + (i < days.spent ? 'spent' : 'remaining');
+                        dot.className = 'dot ' + (i < spentUnits ? 'spent' : 'remaining');
                         
                         // Add hover tooltip
                         dot.addEventListener('mouseenter', (e) => {
-                            const dayNum = i + 1;
-                            const date = new Date(birthDate);
-                            date.setDate(date.getDate() + i);
-                            
-                            tooltip.textContent = `Day ${formatNumber(dayNum)} - ${date.toLocaleDateString()}`;
+                            if (isWeekView) {
+                                const weekNum = i + 1;
+                                const startDate = new Date(birthDate);
+                                startDate.setDate(startDate.getDate() + (i * 7));
+                                const endDate = new Date(startDate);
+                                endDate.setDate(endDate.getDate() + 6);
+                                
+                                tooltip.textContent = `Week ${formatNumber(weekNum)} - ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()}`;
+                            } else {
+                                const dayNum = i + 1;
+                                const date = new Date(birthDate);
+                                date.setDate(date.getDate() + i);
+                                
+                                tooltip.textContent = `Day ${formatNumber(dayNum)} - ${date.toLocaleDateString()}`;
+                            }
                             tooltip.style.opacity = '1';
                         });
                         
@@ -600,6 +716,11 @@
 
         // Set max date to today
         document.getElementById('birthdate').max = new Date().toISOString().split('T')[0];
+
+        // Add event listeners for view mode toggle
+        document.querySelectorAll('input[name="viewMode"]').forEach(radio => {
+            radio.addEventListener('change', updateVisualization);
+        });
     </script>
 </body>
 </html>
