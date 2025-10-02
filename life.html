@@ -763,13 +763,29 @@
 
          function toggleFullscreen() {
         const dotsWrapper = document.querySelector('.dots-wrapper');
-        
-        if (!document.fullscreenElement) {
-            dotsWrapper.requestFullscreen().catch(err => {
-                console.error(`Error attempting to enable fullscreen: ${err.message}`);
-            });
+        // Cross-browser fullscreen support
+        if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+            if (dotsWrapper.requestFullscreen) {
+                dotsWrapper.requestFullscreen();
+            } else if (dotsWrapper.webkitRequestFullscreen) { // Safari/iOS
+                dotsWrapper.webkitRequestFullscreen();
+            } else if (dotsWrapper.msRequestFullscreen) { // IE/Edge
+                dotsWrapper.msRequestFullscreen();
+            } else if (dotsWrapper.mozRequestFullScreen) { // Firefox
+                dotsWrapper.mozRequestFullScreen();
+            } else {
+                alert('Fullscreen API is not supported on this device/browser.');
+            }
         } else {
-            document.exitFullscreen();
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            }
         }
     }
     </script>
