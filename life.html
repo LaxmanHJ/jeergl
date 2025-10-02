@@ -252,49 +252,22 @@
             padding: 16px;
         }
 
-        /* Fullscreen styles with mobile support */
-        .dots-wrapper:fullscreen,
-        .dots-wrapper:-webkit-full-screen,
-        .dots-wrapper:-moz-full-screen,
-        .dots-wrapper:-ms-fullscreen {
-            width: 100vw;
+        :fullscreen .dots-container {
+            max-height: 100vh;
             height: 100vh;
-            padding: 0;
-            background: var(--dark-bg);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .dots-wrapper:fullscreen .dots-container,
-        .dots-wrapper:-webkit-full-screen .dots-container,
-        .dots-wrapper:-moz-full-screen .dots-container,
-        .dots-wrapper:-ms-fullscreen .dots-container {
-            max-height: none;
-            height: 100%;
-            width: 100%;
             padding: 24px;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
-        @media (max-width: 768px) {
-            .dots-wrapper:fullscreen .dots-container,
-            .dots-wrapper:-webkit-full-screen .dots-container,
-            .dots-wrapper:-moz-full-screen .dots-container,
-            .dots-wrapper:-ms-fullscreen .dots-container {
-                padding: 12px;
-                gap: 2px;
-                grid-template-columns: repeat(auto-fill, minmax(8px, 1fr));
-            }
+        :-webkit-full-screen .dots-container {
+            max-height: 100vh;
+            height: 100vh;
+            padding: 24px;
+        }
 
-            .dots-wrapper:fullscreen .fullscreen-btn,
-            .dots-wrapper:-webkit-full-screen .fullscreen-btn,
-            .dots-wrapper:-moz-full-screen .fullscreen-btn,
-            .dots-wrapper:-ms-fullscreen .fullscreen-btn {
-                top: 5px;
-                right: 5px;
-                padding: 6px;
-            }
+        :-ms-fullscreen .dots-container {
+            max-height: 100vh;
+            height: 100vh;
+            padding: 24px;
         }
 
         .dot {
