@@ -416,10 +416,17 @@
             border-radius: 8px;
             font-size: 0.85em;
             pointer-events: none;
-            z-index: 100;
+            z-index: 9999;
             opacity: 0;
             transition: opacity 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dots-wrapper:fullscreen .tooltip,
+        .dots-wrapper:-webkit-full-screen .tooltip,
+        .dots-wrapper:-moz-full-screen .tooltip,
+        .dots-wrapper:-ms-fullscreen .tooltip {
+            position: fixed;
         }
 
         /* Scrollbar styling */
@@ -611,6 +618,7 @@
             <div class="dots-container" id="dotsContainer">
                 <!-- Dots will be generated here -->
             </div>
+            <div class="tooltip" id="tooltip"></div>
         </div>
 
         <div class="legend">
@@ -625,7 +633,6 @@
         </div>
     </div>
 
-    <div class="tooltip" id="tooltip"></div>
 
     <script>
         let tooltip = document.getElementById('tooltip');
@@ -641,8 +648,13 @@
             const remainingDays = Math.max(0, totalDays - spentDays);
             const percentageLived = Math.min(100, Math.round((spentDays / totalDays) * 100));
             
+            // Calculate weeks using UTC dates to avoid timezone issues
+            const birthUTC = Date.UTC(birth.getFullYear(), birth.getMonth(), birth.getDate());
+            const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+            
+            // Calculate complete weeks
             const totalWeeks = Math.floor(totalDays / 7);
-            const spentWeeks = Math.floor(spentDays / 7);
+            const spentWeeks = Math.floor((todayUTC - birthUTC) / (7 * 24 * 60 * 60 * 1000));
             const remainingWeeks = Math.max(0, totalWeeks - spentWeeks);
             
             return {
@@ -732,9 +744,19 @@
                         });
                         
                         dot.addEventListener('mousemove', (e) => {
-                            // Use clientX/clientY for fullscreen compatibility
-                            tooltip.style.left = (e.clientX + 10) + 'px';
-                            tooltip.style.top = (e.clientY - 30) + 'px';
+                            const dotsWrapper = document.querySelector('.dots-wrapper');
+                            const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+                            
+                            if (isFullscreen) {
+                                // In fullscreen mode
+                                tooltip.style.left = (e.clientX + 20) + 'px';
+                                tooltip.style.top = (e.clientY - 10) + 'px';
+                            } else {
+                                // In normal mode
+                                const rect = dotsWrapper.getBoundingClientRect();
+                                tooltip.style.left = (e.clientX - rect.left + 20) + 'px';
+                                tooltip.style.top = (e.clientY - rect.top - 10) + 'px';
+                            }
                         });
                         
                         dot.addEventListener('mouseleave', () => {
