@@ -303,6 +303,27 @@
             background: var(--dot-remaining-border);
             box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
         }
+
+        /* Ensure dot hover works in fullscreen mode */
+        :fullscreen .dot:hover,
+        :-webkit-full-screen .dot:hover,
+        :-ms-fullscreen .dot:hover {
+            transform: scale(2);
+            z-index: 10;
+            cursor: pointer;
+        }
+        :fullscreen .dot.spent:hover,
+        :-webkit-full-screen .dot.spent:hover,
+        :-ms-fullscreen .dot.spent:hover {
+            box-shadow: 0 0 12px rgba(248, 250, 252, 0.8);
+            animation: pulse 0.6s ease infinite;
+        }
+        :fullscreen .dot.remaining:hover,
+        :-webkit-full-screen .dot.remaining:hover,
+        :-ms-fullscreen .dot.remaining:hover {
+            background: var(--dot-remaining-border);
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+        }
         .fullscreen-btn {
                 position: absolute;
                 top: 10px;
