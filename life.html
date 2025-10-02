@@ -732,8 +732,9 @@
                         });
                         
                         dot.addEventListener('mousemove', (e) => {
-                            tooltip.style.left = e.pageX + 10 + 'px';
-                            tooltip.style.top = e.pageY - 30 + 'px';
+                            // Use clientX/clientY for fullscreen compatibility
+                            tooltip.style.left = (e.clientX + 10) + 'px';
+                            tooltip.style.top = (e.clientY - 30) + 'px';
                         });
                         
                         dot.addEventListener('mouseleave', () => {
