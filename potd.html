@@ -7,10 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: sans-serif; text-align: center; }
-        img { max-width: 90%; border: 2px solid #333; margin-top: 80px; }
+        .content-wrapper { padding-top: 100px; }
+        img { max-width: 80%; border: 2px solid #333; }
         html { scroll-behavior: smooth; }
         .glass { background-color: rgba(255,255,255,0.6); backdrop-filter: blur(6px); }
         a { transition: all .2s ease-in-out; text-decoration: none; font-weight: 700; color: inherit; }
+        h1 { font-size: 2.5rem; font-weight: bold; margin-bottom: 1rem; }
+        h2 { font-size: 1.5rem; margin-bottom: 2rem; }
     </style>
 </head>
 <body class="antialiased text-slate-900 bg-white">
@@ -32,10 +35,12 @@
         </nav>
     </header>
 
-    <h1>Image of the Day</h1>
-    <h2 id="title">Loading...</h2>
-    <img id="bing-image" alt="Bing Image of the Day">
-    <p id="copyright"></p>
+    <div class="content-wrapper">
+        <h1>Image of the Day</h1>
+        <h2 id="title">Loading...</h2>
+        <img id="bing-image" alt="Bing Image of the Day">
+        <p id="copyright"></p>
+    </div>
 
     <script>
         // Define the base URLs
