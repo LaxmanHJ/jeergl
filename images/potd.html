@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-g">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bing Image of the Day</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; }
+        img { max-width: 90%; border: 2px solid #333; }
+    </style>
+</head>
+<body>
+
+    <h1>Bing Image of the Day</h1>
+    <h2 id="title">Loading...</h2>
+    <img id="bing-image" alt="Bing Image of the Day">
+    <p id="copyright"></p>
+
+    <script>
+        // Define the base URLs
+        const BING_API_URL = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US";
+        const BING_BASE_URL = "https://www.bing.com";
+
+        /**
+         * Fetches and displays the Bing Image of the Day
+         */
+        async function getBingImage() {
+            try {
+                // Step 1: Fetch the metadata from the API
+                const response = await fetch(BING_API_URL);
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                const data = await response.json();
+
+                // Step 2: Extract the information
+                const image = data.images[0];
+                const imageUrl = BING_BASE_URL + image.url;
+                const imageTitle = image.title;
+                const imageCopyright = image.copyright;
+
+                // Step 3: Display the image and its details on the page
+                document.getElementById("title").innerText = imageTitle;
+                document.getElementById("copyright").innerText = imageCopyright;
+                
+                const imgElement = document.getElementById("bing-image");
+                imgElement.src = imageUrl;
+                imgElement.alt = imageTitle;
+
+            } catch (error) {
+                // Handle any errors that occurred during the fetch
+                console.error("Error fetching Bing image:", error);
+                document.getElementById("title").innerText = "Failed to load image";
+                document.getElementById("copyright").innerText = error.message;
+            }
+        }
+
+        // Run the function when the page loads
+        getBingImage();
+    </script>
+
+</body>
+</html>
