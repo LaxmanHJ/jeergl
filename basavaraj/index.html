@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basavaraj Jeeragal | Full-Stack Developer in Bengaluru</title>
+<meta name="description" content="Basavaraj Jeeragal is a full-stack developer in Bengaluru and a final-year B.Tech Computer Science student at PES University. React, Node.js, FastAPI and REST API projects, including a stock valuation engine.">
+<link rel="canonical" href="https://jeergl.com/basavaraj/">
+<meta name="theme-color" content="#f7f9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1a1c" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Basavaraj Jeeragal">
+<meta property="og:url" content="https://jeergl.com/basavaraj/">
+<meta property="og:title" content="Basavaraj Jeeragal | Full-Stack Developer in Bengaluru">
+<meta property="og:description" content="Basavaraj Jeeragal is a full-stack developer in Bengaluru and a final-year B.Tech Computer Science student at PES University. React, Node.js, FastAPI and REST API projects, including a stock valuation engine.">
+<meta property="og:image" content="https://jeergl.com/basavaraj/og-basavaraj.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/basavaraj/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/basavaraj/styles.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Basavaraj Jeeragal","url":"https://jeergl.com/basavaraj/","jobTitle":"Full-Stack Developer","email":"mailto:bjeergal@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Bengaluru","addressCountry":"IN"},"alumniOf":[{"@type":"EducationalOrganization","name":"PES University"},{"@type":"EducationalOrganization","name":"Gomatesh Polytechnic"}],"knowsAbout":["React","Node.js","FastAPI","REST APIs","Java","Python","JavaScript","SQL"],"sameAs":["https://github.com/basujeergal","https://www.linkedin.com/in/basavaraj-jeergal-aabb08253/","https://leetcode.com/u/bjeergal/"]}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/basavaraj/" aria-label="Basavaraj Jeeragal, home"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor"/><path d="M7 22l6-7 4 4 8-10" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Basavaraj Jeeragal</span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-btn" type="button" aria-label="Switch between light and dark theme"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.4A7 7 0 0 1 12 3z" fill="currentColor"/></svg></button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <p class="eyebrow">Full-Stack Developer · Bengaluru, India</p>
+      <h1>Basavaraj Jeeragal</h1>
+      <p class="lead">Full-stack developer in Bengaluru. I build React and Node.js applications, mostly around stock valuation and market data, and I finish my B.Tech in Computer Science at PES University in 2027.</p>
+      <div class="actions">
+        <a class="btn primary" href="#projects">See my projects</a>
+        <a class="btn" href="/basavaraj/resumes/Basavaraj_Jeeragal_Resume.pdf" download>Download resume (PDF)</a>
+      </div>
+      <ul class="links" aria-label="Profiles">
+        <li><a href="https://github.com/basujeergal" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/basavaraj-jeergal-aabb08253/" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="https://leetcode.com/u/bjeergal/" rel="me noopener" target="_blank">LeetCode</a></li>
+        <li><a href="mailto:bjeergal@gmail.com">bjeergal@gmail.com</a></li>
+      </ul>
+    </div>
+    <form class="calc reveal" id="calc" aria-labelledby="calc-title" onsubmit="return false">
+      <h2 id="calc-title">Try the idea behind my valuation engine</h2>
+      <p class="calc-note">Move the sliders to price a dividend-paying share with the Dividend Discount Model and CAPM.</p>
+      <label for="div">Next year's dividend per share <output id="div-out" for="div">₹24</output></label>
+      <input id="div" type="range" min="1" max="100" step="1" value="24">
+      <label for="growth">Dividend growth per year <output id="growth-out" for="growth">6.0%</output></label>
+      <input id="growth" type="range" min="0" max="12" step="0.5" value="6">
+      <label for="beta">Beta (how much the share moves with the market) <output id="beta-out" for="beta">0.90</output></label>
+      <input id="beta" type="range" min="0.4" max="2" step="0.05" value="0.9">
+      <div class="calc-result" aria-live="polite">
+        <div><span class="k">Required return</span><span class="v" id="req">12.4%</span></div>
+        <div class="big"><span class="k">Intrinsic value per share</span><span class="v" id="value">₹375</span></div>
+      </div>
+      <svg class="curve" id="curve" viewBox="0 0 320 90" role="img" aria-label="How the value changes as dividend growth rises"></svg>
+      <p class="calc-foot" id="calc-msg">Value = dividend ÷ (required return − growth). Assumes a 7% risk-free rate and a 13% market return. An illustration, not investment advice.</p>
+    </form>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="wrap two-col">
+    <h2>About</h2>
+    <div class="prose reveal">
+      <p>I am a final-year B.Tech Computer Science student at PES University. I came to the degree through a diploma in Computer Science at Gomatesh Polytechnic, where I graduated with a 9.30 CGPA.</p>
+      <p>Most of what I build sits where web development meets finance: a valuation engine that prices shares from their dividends, and a quantitative analysis platform that combines Node.js with a Python model. I enjoy the backend side most, designing REST APIs, caching slow data sources and keeping the data model simple.</p>
+      <p>Outside project work I practise data structures and algorithms, with more than 100 problems solved on LeetCode across arrays, dynamic programming, graphs and trees.</p>
+      <p>I speak English, Hindi and Kannada, and I am looking for a full-stack developer role or internship.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section tint">
+  <div class="wrap two-col">
+    <h2>Skills</h2>
+    <dl class="skills reveal">
+      <div><dt>Languages</dt><dd>Java, Python, JavaScript</dd></div>
+      <div><dt>Frontend</dt><dd>React.js, HTML, CSS</dd></div>
+      <div><dt>Backend</dt><dd>Node.js, FastAPI, REST APIs</dd></div>
+      <div><dt>Databases</dt><dd>SQL, SQLite, JDBC</dd></div>
+      <div><dt>Tools</dt><dd>Git, GitHub, Docker, Vercel</dd></div>
+      <div><dt>Core</dt><dd>Data Structures and Algorithms, OOP, DBMS, Operating Systems, Computer Networks, API Design, Caching</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <article class="project reveal">
+      <div class="project-head">
+        <h3>Intrinsic Equity Valuation Engine</h3>
+        <p class="stack">React.js, Node.js, Chart.js, REST APIs</p>
+      </div>
+      <div class="project-body">
+        <p>A full-stack tool that estimates what a share is worth from the dividends it pays, then checks the estimate against five years of history.</p>
+        <ul>
+          <li>Built a full-stack stock valuation system based on the Dividend Discount Model (DDM).</li>
+          <li>Integrated CAPM to compute a risk-adjusted discount rate from each stock&#39;s beta.</li>
+          <li>Backtested 5 years of financial data to evaluate valuation-based strategies.</li>
+          <li>Visualized Sharpe ratio, drawdown and return against a benchmark with Chart.js.</li>
+        </ul>
+        <a class="text-link" href="https://dividend-frontend.vercel.app/" target="_blank" rel="noopener">Open the live project</a>
+      </div>
+    </article>
+    <article class="project reveal">
+      <div class="project-head">
+        <h3>Equity Tracker, Quantitative Analyzer</h3>
+        <p class="stack">Node.js, FastAPI, Pandas, NumPy, SQLite</p>
+      </div>
+      <div class="project-body">
+        <p>A quantitative analysis platform that pairs a Node.js application with a Python service for the numerical work.</p>
+        <ul>
+          <li>Developed a full-stack quantitative analysis platform using Node.js and Python.</li>
+          <li>Built a machine-learning model that reached about 75% prediction accuracy.</li>
+          <li>Reduced external API calls by about 40% with SQLite caching.</li>
+          <li>Implemented RSI, MACD and momentum indicators for trading insights.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="project reveal">
+      <div class="project-head">
+        <h3>Golf Charity Platform</h3>
+        <p class="stack">React.js, REST APIs, Vercel</p>
+      </div>
+      <div class="project-body">
+        <p>A platform for running charity golf events and managing donations.</p>
+        <ul>
+          <li>Built a full-stack platform for managing charity events and donations, with REST APIs and a responsive React.js frontend.</li>
+          <li>Deployed the application on Vercel.</li>
+        </ul>
+        <a class="text-link" href="https://golf-charity-dusky.vercel.app/" target="_blank" rel="noopener">Open the live project</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="education" class="section tint">
+  <div class="wrap two-col">
+    <h2>Education</h2>
+    <div class="reveal">
+      <ol class="timeline">
+        <li>
+          <span class="when">2024 to 2027</span>
+          <h3>B.Tech in Computer Science Engineering</h3>
+          <p>PES University, Bengaluru</p>
+        </li>
+        <li>
+          <span class="when">2021 to 2024</span>
+          <h3>Diploma in Computer Science Engineering</h3>
+          <p>Gomatesh Polytechnic. CGPA 9.30 out of 10.</p>
+        </li>
+      </ol>
+      <h3 class="sub" id="certifications">Certifications</h3>
+      <ul class="plain">
+        <li>Full Stack Development</li>
+        <li>Prompt Engineering</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="resume" class="section">
+  <div class="wrap two-col">
+    <h2>Resume</h2>
+    <div class="prose reveal">
+      <p>A one-page resume with my projects, skills and education, formatted so applicant tracking systems can read it.</p>
+      <div class="actions">
+        <a class="btn primary" href="/basavaraj/resumes/Basavaraj_Jeeragal_Resume.pdf" download>Download resume (PDF)</a>
+        <a class="btn" href="/basavaraj/resumes/Basavaraj_Jeeragal_Resume.docx" download>Download as Word (DOCX)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p class="lead">I am open to full-stack developer roles and internships. Email is the fastest way to reach me.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:bjeergal@gmail.com">Email bjeergal@gmail.com</a>
+      <button class="btn" type="button" id="copy-email" data-email="bjeergal@gmail.com">Copy email address</button>
+    </div>
+    <ul class="links" aria-label="Profiles">
+        <li><a href="https://github.com/basujeergal" rel="me noopener" target="_blank">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/basavaraj-jeergal-aabb08253/" rel="me noopener" target="_blank">LinkedIn</a></li>
+        <li><a href="https://leetcode.com/u/bjeergal/" rel="me noopener" target="_blank">LeetCode</a></li>
+      </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <p>© <span id="year">2026</span> Basavaraj Jeeragal. Bengaluru, India.</p>
+    <p><a href="/basavaraj/">jeergl.com/basavaraj</a></p>
+  </div>
+</footer>
+<script src="/basavaraj/script.js" defer></script>
+</body>
+</html>
