@@ -12,6 +12,11 @@
     reveals.forEach(function (r) { rio.observe(r); });
   } else { reveals.forEach(function (r) { r.classList.add('in'); }); }
 
+  // Scale the live project previews (a 1280px-wide page) down to their frame
+  var views = Array.prototype.slice.call(document.querySelectorAll('.viewport'));
+  var fitViews = function () { views.forEach(function (v) { v.style.setProperty('--s', (v.clientWidth / 1280).toFixed(4)); }); };
+  if (views.length) { fitViews(); window.addEventListener('resize', fitViews); }
+
   // Theme toggle
   var themeBtn = document.querySelector('.theme-btn');
   if (themeBtn) {

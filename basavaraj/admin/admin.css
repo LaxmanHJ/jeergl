@@ -84,3 +84,7 @@ td select { min-height: 36px; padding: 5px 8px; }
 .toast.bad { background: var(--red); color: #fff; }
 @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
 @media (max-width: 640px) { .tabs { order: 3; flex-basis: 100%; } .who { margin-left: auto; } }
+
+details { margin: 4px 0 14px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+details > summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+details[open] > summary { margin-bottom: 12px; }

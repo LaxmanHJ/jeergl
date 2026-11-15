@@ -259,6 +259,8 @@ function renderProfile() {
   const p = S.profile, v = S.priv;
   const f = {
     name: input(p.name), headline: input(p.headline), resumeHeadline: input(p.resumeHeadline), location: input(p.location), email: input(p.email, { type: 'email' }),
+    greeting: input(p.intro?.greeting), tagline: input(p.intro?.tagline), roles: input((p.intro?.roles || []).join(', ')), introAvail: input(p.intro?.availability), photoAlt: input(p.photo?.alt), statement: area(p.intro?.statement, 4),
+    facts: area((p.facts || []).map((s) => `${s.value} | ${s.label}`).join('\n'), 3),
     lead: area(p.lead, 3), summary: area(p.summary, 4), about: area((p.about || []).join('\n\n'), 8), seeking: area(p.seeking, 2),
     links: area((p.links || []).map((l) => `${l.label} | ${l.url}`).join('\n'), 3),
     skills: area((p.skills || []).map((g) => `${g.group}: ${g.items.join(', ')}`).join('\n'), 7),
@@ -278,11 +280,24 @@ function renderProfile() {
   const bind = (obj, key, el, parse = (x) => x) => { el.addEventListener('input', () => { obj[key] = parse(el.value); }); return el; };
   const exp = repeat(p.experience || [], (e) => [h('div', { class: 'grid2' }, field('Company', bind(e, 'company', input(e.company))), field('Title', bind(e, 'title', input(e.title))), field('Location', bind(e, 'location', input(e.location))), field('Start', bind(e, 'start', input(e.start))), field('End', bind(e, 'end', input(e.end)))),
     field('Bullet points', bind(e, 'bullets', area((e.bullets || []).join('\n'), 6), lines), 'One per line.')], () => ({ company: '', title: '', location: '', start: '', end: '', bullets: [] }), 'Role');
+  const story = repeat(p.story || [], (x) => [field('Heading', bind(x, 'title', input(x.title))), field('Text', bind(x, 'body', area(x.body, 4)), 'Leave empty to keep this card off the public page.')], () => ({ title: '', body: '' }), 'Story card');
   const proj = repeat(p.projects || [], (x) => [h('div', { class: 'grid2' }, field('Name', bind(x, 'name', input(x.name))), field('Tech stack', bind(x, 'stack', input((x.stack || []).join(', ')), splitTop), 'Comma separated.'), field('Link', bind(x, 'url', input(x.url, { type: 'url' }))), field('Link label', bind(x, 'urlLabel', input(x.urlLabel)), '"Live project" or "GitHub".')),
-    field('One-line summary', bind(x, 'summary', input(x.summary))), field('Bullet points', bind(x, 'bullets', area((x.bullets || []).join('\n'), 5), lines), 'One per line.')], () => ({ name: '', stack: [], summary: '', bullets: [], url: '', urlLabel: 'Live project' }), 'Project');
+    field('One-line summary', bind(x, 'summary', input(x.summary))), field('Bullet points', bind(x, 'bullets', area((x.bullets || []).join('\n'), 5), lines), 'One per line. Used on the resume.'),
+    h('details', {}, h('summary', {}, 'Case study on the public page'),
+      field('Tagline', bind(x, 'tagline', input(x.tagline))), field('The problem', bind(x, 'problem', area(x.problem, 3))), field('My solution', bind(x, 'solution', area(x.solution, 4))),
+      field('What it does', bind(x, 'features', area((x.features || []).join('\n'), 4), lines), 'One per line.'),
+      field('Architecture', bind(x, 'architecture', area((x.architecture || []).join('\n'), 4), lines), 'One step per line, in order.'),
+      field('Results', bind(x, 'metrics', area((x.metrics || []).map((m) => `${m.value} | ${m.label}`).join('\n'), 2), (v) => lines(v).map((l) => { const [value, label] = l.split('|').map((t) => t.trim()); return { value, label }; }).filter((m) => m.value && m.label)), 'One per line as: ~75% | prediction accuracy, as reported. Only real, measured results.'),
+      field('Engineering decisions', bind(x, 'decisions', area((x.decisions || []).join('\n'), 3), lines), 'One per line. Hidden on the public page while empty.'),
+      field('Challenges and learnings', bind(x, 'learnings', area((x.learnings || []).join('\n'), 3), lines), 'One per line. Hidden on the public page while empty.'),
+      field('GitHub repository', bind(x, 'repo', input(x.repo, { type: 'url', placeholder: 'https://github.com/...' })), 'Hidden on the public page while empty.'))], () => ({ name: '', stack: [], summary: '', bullets: [], url: '', urlLabel: 'Live project', tagline: '', problem: '', solution: '', features: [], architecture: [], metrics: [], decisions: [], learnings: [], repo: '' }), 'Project');
 
   const save = async () => {
     const next = { ...p, name: f.name.value.trim(), headline: f.headline.value.trim(), resumeHeadline: f.resumeHeadline.value.trim(), location: f.location.value.trim(), email: f.email.value.trim(),
+      ...(p.hero === 'studio' ? { intro: { greeting: f.greeting.value.trim(), tagline: f.tagline.value.trim(), roles: splitTop(f.roles.value), availability: f.introAvail.value.trim(), statement: f.statement.value.trim() },
+        ...(p.photo ? { photo: { ...p.photo, alt: f.photoAlt.value.trim() || `Portrait of ${f.name.value.trim()}` } } : {}),
+        facts: lines(f.facts.value).map((l) => { const [value, label] = l.split('|').map((x) => x.trim()); return { value, label }; }).filter((s) => s.value && s.label),
+        story: story.list.filter((x) => x.title) } : {}),
       lead: f.lead.value.trim(), summary: f.summary.value.trim(), about: f.about.value.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean), seeking: f.seeking.value.trim(),
       links: lines(f.links.value).map((l) => { const [label, url] = l.split('|').map((x) => x.trim()); return { label, url }; }).filter((l) => l.label && safeUrl(l.url)),
       skills: lines(f.skills.value).map((l) => { const i = l.indexOf(':'); return i > 0 ? { group: l.slice(0, i).trim(), items: splitTop(l.slice(i + 1)) } : null; }).filter(Boolean),
@@ -303,6 +318,11 @@ function renderProfile() {
     h('p', { class: 'muted' }, `This is the single source for your resumes, cover letters and the public page at ${siteName()}. Save, then publish to update the public page.`),
     h('section', { class: 'card' }, h('h2', {}, 'Basics'), h('div', { class: 'grid2' }, field('Full name', f.name), field('Headline', f.headline), field('Resume headline', f.resumeHeadline), field('Location', f.location), field('Email', f.email)),
       field('Opening line on the public page', f.lead), field('Resume summary', f.summary), field('About (public page)', f.about, 'Leave a blank line between paragraphs.'), field('Contact section line', f.seeking), field('Links', f.links, 'One per line as: Label | https://address')),
+    p.hero === 'studio' ? h('section', { class: 'card' }, h('h2', {}, 'Opening section'),
+      h('div', { class: 'grid2' }, field('Main headline', f.greeting), field('Supporting headline', f.tagline), field('Roles', f.roles, 'Comma separated.'), field('Availability', f.introAvail, 'Shown as a small badge. Leave empty to hide it.')),
+      p.photo ? field('Photo description', f.photoAlt, 'Read aloud by screen readers. Describe what the photo shows.') : null,
+      field('Introduction', f.statement), field('Headline numbers', f.facts, 'One per line as: 100+ | LeetCode problems solved. Only real numbers.')) : null,
+    p.hero === 'studio' ? h('section', { class: 'card' }, h('h2', {}, 'About cards'), h('p', { class: 'muted' }, 'Who you are, your journey, what motivates you, how you approach problems, what you are learning and where you are headed. Cards without text stay off the public page.'), story.box) : null,
     p.hero === 'stats' ? h('section', { class: 'card' }, h('h2', {}, 'Headline numbers'), field('Numbers on the public page', f.stats, 'One per line as: 6+ | years building on Salesforce')) : null,
     h('section', { class: 'card' }, h('h2', {}, 'Skills'), field('Skill groups', f.skills, 'One group per line as: Group: skill, skill, skill')),
     h('section', { class: 'card' }, h('h2', {}, 'Experience'), exp.box),
