@@ -27,7 +27,7 @@ export function resumeModel(profile, priv = {}, job = null, opts = {}) {
 
   const links = (profile.links || []).map((l) => ({ label: l.label, url: l.url }));
   const site = profileUrl(profile);
-  if (site) links.push({ label: site.replace(/^https?:\/\//, '').replace(/\/$/, ''), url: site });
+  if (site) links.push({ label: site.replace(/^https?:\/\//, '').replace(/\/$/, ''), url: site, portfolio: true });
   const contact = [profile.location, opts.includePhone && priv.phone ? priv.phone : null, profile.email].filter(Boolean);
 
   return {
@@ -44,9 +44,11 @@ export function resumeModel(profile, priv = {}, job = null, opts = {}) {
   };
 }
 
+const linkText = (l) => (l.portfolio ? 'Portfolio: ' : '') + l.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+
 export function resumeText(m) {
   const L = [];
-  L.push(m.name, m.headline, [...m.contact, ...m.links.map((l) => l.url)].join(' | '), '');
+  L.push(m.name, m.headline, [...m.contact, ...m.links.map(linkText)].join(' | '), '');
   L.push('SUMMARY', m.summary, '');
   L.push('SKILLS', ...m.skills.map((g) => `${g.group}: ${g.items.join(', ')}`), '');
   if (m.experience.length) {
@@ -114,7 +116,7 @@ export async function resumePdf(m) {
 
     set('bold', 19 * k); doc.text(ascii(m.name), M, y); y += 15 * k;
     set('normal', 10.8 * k, GREEN); doc.text(ascii(m.headline), M, y); y += 13 * k;
-    para([...m.contact, ...m.links.map((l) => l.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))].join(' | '), { size: 8.8 * k, color: GREY });
+    para([...m.contact, ...m.links.map(linkText)].join(' | '), { size: 8.8 * k, color: GREY });
     section('Summary'); para(m.summary);
     section('Skills'); m.skills.forEach((g) => labelled(`${g.group}:`, g.items.join(', ')));
     if (m.experience.length) { section('Experience'); m.experience.forEach((e) => { twoCol(`${e.company} | ${e.title} | ${e.location}`, `${e.start} - ${e.end}`); bullets(e.bullets); }); }
@@ -144,7 +146,7 @@ export async function resumeDocx(m) {
 
   const kids = [
     p(run(m.name, { bold: true, size: 40 })), p(run(m.headline, { size: 22, color: GREEN })),
-    p(run([...m.contact, ...m.links.map((l) => l.url)].join(' | '), { size: 19 })),
+    p(run([...m.contact, ...m.links.map(linkText)].join(' | '), { size: 19 })),
     heading('Summary'), p(run(m.summary)),
     heading('Skills'), ...m.skills.map((g) => p([run(`${g.group}: `, { bold: true }), run(g.items.join(', '))])),
   ];
